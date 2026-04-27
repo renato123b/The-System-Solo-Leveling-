@@ -23,4 +23,4 @@ O sistema utiliza a relação entre Peso e Altura para definir a dificuldade ini
 ## 🚀 Como Executar (Em breve)
 ```bash
 # Clone o repositório
-git clone [https://github.com/seu-usuario/the-system-fitness.git](https://github.com/seu-usuario/the-system-fitness.git)
+git clone [https://github.com/renato123b/The-System-Solo-Leveling-.git
