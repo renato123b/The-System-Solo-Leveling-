@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solo Leveling: System Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&family=Roboto+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -43,6 +46,7 @@
         }
     </script>
 </head>
+
 <body class="font-rajdhani selection:bg-systemCyan selection:text-systemDark">
 
     <div class="hologram-overlay"></div>
@@ -50,26 +54,33 @@
 
     <!-- Background Elements -->
     <div class="fixed inset-0 z-[-1] opacity-30">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-systemBlue rounded-full filter blur-[120px] animate-pulse-slow"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600 rounded-full filter blur-[120px] animate-pulse-slow"></div>
+        <div
+            class="absolute top-1/4 left-1/4 w-96 h-96 bg-systemBlue rounded-full filter blur-[120px] animate-pulse-slow">
+        </div>
+        <div
+            class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600 rounded-full filter blur-[120px] animate-pulse-slow">
+        </div>
     </div>
 
     <!-- Header Status Bar -->
-    <header class="fixed top-0 left-0 w-full z-40 p-4 lg:p-6 flex justify-between items-center bg-gradient-to-b from-systemDark to-transparent">
+    <header
+        class="fixed top-0 left-0 w-full z-40 p-4 lg:p-6 flex justify-between items-center bg-gradient-to-b from-systemDark to-transparent">
         <div class="flex items-center space-x-4">
             <div class="relative w-16 h-16 flex items-center justify-center">
                 <svg class="absolute inset-0 transform -rotate-90" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(0,174,239,0.2)" stroke-width="4" />
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="#00FFFF" stroke-width="4" stroke-dasharray="283" stroke-dashoffset="240" class="drop-shadow-[0_0_8px_#00FFFF]" />
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#00FFFF" stroke-width="4" stroke-dasharray="283"
+                        stroke-dashoffset="240" class="drop-shadow-[0_0_8px_#00FFFF]" />
                 </svg>
                 <div class="text-center">
-                    <span class="block text-[10px] uppercase font-orbitron tracking-tighter text-systemCyan">Level</span>
-                    <span class="block text-2xl font-bold font-orbitron">01</span>
+                    <span
+                        class="block text-[10px] uppercase font-orbitron tracking-tighter text-systemCyan">Level</span>
+                    <span id="player-level-header" class="block text-2xl font-bold font-orbitron">01</span>
                 </div>
             </div>
             <div>
-                <h1 class="font-orbitron text-xl font-black tracking-widest text-systemText">PLAYER_ONE</h1>
-                <p class="text-xs text-systemCyan font-mono tracking-widest animate-pulse">RANK: E (AWAKENING)</p>
+                <h1 id="player-name-header" class="font-orbitron text-xl font-black tracking-widest text-systemText">PLAYER_ONE</h1>
+                <p id="player-rank-header" class="text-xs text-systemCyan font-mono tracking-widest animate-pulse">RANK: E (AWAKENING)</p>
             </div>
         </div>
 
@@ -86,30 +97,63 @@
 
     <!-- Main Content Grid -->
     <main class="relative z-10 pt-28 pb-10 px-4 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- Welcome Dialogue - Full Width Initial -->
-        <section id="onboarding" class="lg:col-span-12 mb-6">
-            <div class="glass-panel p-6 lg:p-8 rounded-tr-3xl rounded-bl-3xl border-l-4 border-systemCyan animate-float">
+
+        <!-- Welcome/Onboarding Dialogue - Full Width Initial -->
+        <section id="onboarding-section" class="lg:col-span-12 mb-6">
+            <!-- Form de Onboarding (Novo Jogador) -->
+            <div id="onboarding-form-panel" class="glass-panel p-6 lg:p-8 rounded-tr-3xl rounded-bl-3xl border-l-4 border-systemCyan animate-float hidden">
+                <div class="flex items-start space-x-4 mb-6">
+                    <div class="w-12 h-12 bg-systemCyan/20 flex-shrink-0 flex items-center justify-center rounded-lg border border-systemCyan/40">
+                        <svg class="w-6 h-6 text-systemCyan" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="font-orbitron text-systemCyan text-sm tracking-widest mb-1">ALERTA DO SISTEMA</h2>
+                        <h3 class="font-orbitron text-2xl font-black text-white uppercase">Registrar Novo Caçador</h3>
+                        <p class="text-sm text-gray-400 mt-1">Insira seus dados biométricos para que o Sistema possa calibrar seus limites e classe de combate.</p>
+                    </div>
+                </div>
+
+                <form id="onboarding-form" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="space-y-2">
+                            <label class="text-xs font-orbitron text-systemCyan ml-2 uppercase">Nome do Caçador</label>
+                            <input type="text" id="input-name" required placeholder="Digite seu codinome..."
+                                class="w-full bg-systemDark/40 border border-systemBlue/30 rounded-lg p-3 text-white font-mono input-glow transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-orbitron text-systemCyan ml-2 uppercase">Peso Atual (kg)</label>
+                            <input type="number" id="input-weight" required min="30" max="250" step="0.1" placeholder="Ex: 85.5"
+                                class="w-full bg-systemDark/40 border border-systemBlue/30 rounded-lg p-3 text-white font-mono input-glow transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-orbitron text-systemCyan ml-2 uppercase">Altura Atual (m)</label>
+                            <input type="number" id="input-height" required min="1.0" max="2.5" step="0.01" placeholder="Ex: 1.80"
+                                class="w-full bg-systemDark/40 border border-systemBlue/30 rounded-lg p-3 text-white font-mono input-glow transition-all">
+                        </div>
+                    </div>
+                    <div class="flex justify-end pt-4">
+                        <button type="submit" class="bg-systemCyan text-systemDark font-orbitron font-bold px-8 py-3 rounded-lg border border-cyan-400 hover:bg-white transition-all shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.6)] uppercase tracking-wider">
+                            Iniciar Despertar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Painel de Saudação Dinâmico (Jogador Ativo) -->
+            <div id="onboarding-welcome-panel" class="glass-panel p-6 lg:p-8 rounded-tr-3xl rounded-bl-3xl border-l-4 border-systemCyan animate-float">
                 <div class="flex items-start space-x-4">
                     <div class="w-12 h-12 bg-systemCyan/20 flex-shrink-0 flex items-center justify-center rounded-lg border border-systemCyan/40">
-                        <svg class="w-6 h-6 text-systemCyan" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+                        <svg class="w-6 h-6 text-systemCyan" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z" />
+                        </svg>
                     </div>
                     <div class="flex-1">
                         <h2 class="font-orbitron text-systemCyan text-sm tracking-widest mb-2">SYSTEM MESSAGE</h2>
                         <p id="typewriter" class="text-lg lg:text-xl font-medium leading-relaxed italic text-gray-200">
-                            [Saudações, Viajante das Terras Médias. Os portões da Cidadela se abrem para você. Seus passos ecoam com o peso de alguém que carrega grande potencial, mas a jornada para a maestria física apenas começou. O Oráculo observou sua forma e traçou seu destino inicial. Prepare-se, pois sua transmutação em herói lendário começa agora!]
+                            [Saudações, Viajante das Terras Médias. Os portões da Cidadela se abrem para você...]
                         </p>
-                    </div>
-                </div>
-                
-                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="space-y-2">
-                        <label class="text-xs font-orbitron text-systemCyan ml-2 uppercase">Peso Atual (kg)</label>
-                        <input type="number" value="90" class="w-full bg-systemDark/40 border border-systemBlue/30 rounded-lg p-3 text-white font-mono input-glow transition-all" readonly>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-xs font-orbitron text-systemCyan ml-2 uppercase">Altura Atual (m)</label>
-                        <input type="number" value="1.73" class="w-full bg-systemDark/40 border border-systemBlue/30 rounded-lg p-3 text-white font-mono input-glow transition-all" readonly>
                     </div>
                 </div>
             </div>
@@ -123,9 +167,12 @@
                         <h3 class="font-orbitron text-lg text-white">ANÁLISE DE ENTRADA</h3>
                         <p class="text-xs text-systemCyan/70">Mapeamento Biométrico em tempo real</p>
                     </div>
-                    <div class="text-right">
-                        <span class="text-xs text-systemCyan block">BMI / IMC</span>
-                        <span class="text-3xl font-black font-orbitron text-systemCyan">30.07</span>
+                    <div class="flex items-center space-x-4">
+                        <button id="btn-update-biometrics" class="text-[10px] font-orbitron border border-systemCyan/40 hover:bg-systemCyan/10 text-systemCyan px-2 py-1 rounded transition-colors">ATUALIZAR BIO</button>
+                        <div class="text-right">
+                            <span class="text-xs text-systemCyan block">BMI / IMC</span>
+                            <span id="bmi-value" class="text-3xl font-black font-orbitron text-systemCyan">30.07</span>
+                        </div>
                     </div>
                 </div>
 
@@ -133,68 +180,114 @@
                     <div class="p-4 bg-systemBlue/5 rounded-lg border border-systemBlue/20">
                         <div class="flex justify-between text-sm mb-2">
                             <span class="text-gray-400">Classificação:</span>
-                            <span class="text-systemCyan font-bold uppercase tracking-widest">Muralha em Construção</span>
+                            <span id="bmi-class" class="text-systemCyan font-bold uppercase tracking-widest">Muralha em Construção</span>
                         </div>
                         <div class="stat-bar w-full rounded-full overflow-hidden">
-                            <div class="stat-progress w-[85%] animate-pulse"></div>
+                            <div id="bmi-progress" class="stat-progress w-[85%] animate-pulse"></div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="p-4 bg-systemDark/40 rounded-lg border border-white/5">
                             <span class="text-[10px] text-gray-500 uppercase block mb-1">Status da Jornada</span>
-                            <span class="text-sm font-bold text-white uppercase">Guerreiro de Armadura Pesada</span>
+                            <span id="journey-status" class="text-sm font-bold text-white uppercase">Guerreiro de Armadura Pesada</span>
                         </div>
                         <div class="p-4 bg-systemDark/40 rounded-lg border border-white/5">
                             <span class="text-[10px] text-gray-500 uppercase block mb-1">Potencial de Evolução</span>
-                            <span class="text-sm font-bold text-systemCyan uppercase">Nível Lendário</span>
+                            <span id="evolution-potential" class="text-sm font-bold text-systemCyan uppercase">Nível Lendário</span>
                         </div>
                     </div>
 
                     <!-- RPG Stats Grid -->
+                    <div id="attribute-points-container" class="hidden justify-between items-center p-3 bg-systemCyan/10 border border-systemCyan/30 rounded-lg mb-4 animate-pulse">
+                        <span class="text-xs font-orbitron text-systemCyan">PONTOS DE ATRIBUTO DISPONÍVEIS:</span>
+                        <span id="attribute-points-value" class="font-orbitron font-bold text-white text-lg">0</span>
+                    </div>
+
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                         <!-- Strength -->
                         <div class="group cursor-default">
-                            <div class="glass-panel p-3 rounded-lg border-b-2 border-red-500/50 group-hover:scale-105 transition-transform">
+                            <div
+                                class="glass-panel p-3 rounded-lg border-b-2 border-red-500/50 group-hover:scale-105 transition-transform">
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-red-400"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.37 8.91l-8.17-8.17a.996.996 0 00-1.41 0L2.62 8.91a.996.996 0 000 1.41l8.17 8.17c.39.39 1.02.39 1.41 0l8.17-8.17a.996.996 0 000-1.41z"/></svg></span>
-                                    <span class="font-orbitron font-bold text-xl">14</span>
+                                    <span class="text-red-400"><svg class="w-4 h-4" fill="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.37 8.91l-8.17-8.17a.996.996 0 00-1.41 0L2.62 8.91a.996.996 0 000 1.41l8.17 8.17c.39.39 1.02.39 1.41 0l8.17-8.17a.996.996 0 000-1.41z" />
+                                        </svg></span>
+                                    <div class="flex items-center space-x-2">
+                                        <span id="stat-str" class="font-orbitron font-bold text-xl">14</span>
+                                        <button id="btn-add-str" class="hidden w-5 h-5 flex items-center justify-center bg-red-500 text-white rounded-full text-xs font-bold hover:bg-red-400 transition-colors">+</button>
+                                    </div>
                                 </div>
                                 <div class="text-[10px] font-orbitron tracking-tighter text-gray-400">FORÇA (STR)</div>
-                                <div class="stat-bar mt-2"><div class="stat-progress w-[70%] !bg-red-500"></div></div>
+                                <div class="stat-bar mt-2">
+                                    <div id="stat-progress-str" class="stat-progress w-[70%] !bg-red-500"></div>
+                                </div>
                             </div>
                         </div>
                         <!-- Agility -->
                         <div class="group cursor-default">
-                            <div class="glass-panel p-3 rounded-lg border-b-2 border-green-500/50 group-hover:scale-105 transition-transform">
+                            <div
+                                class="glass-panel p-3 rounded-lg border-b-2 border-green-500/50 group-hover:scale-105 transition-transform">
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-green-400"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M5 16l3 3 8-8 3 3V9h-7l3 3-8 8-3-3v7z"/></svg></span>
-                                    <span class="font-orbitron font-bold text-xl">07</span>
+                                    <span class="text-green-400"><svg class="w-4 h-4" fill="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path d="M5 16l3 3 8-8 3 3V9h-7l3 3-8 8-3-3v7z" />
+                                        </svg></span>
+                                    <div class="flex items-center space-x-2">
+                                        <span id="stat-agi" class="font-orbitron font-bold text-xl">07</span>
+                                        <button id="btn-add-agi" class="hidden w-5 h-5 flex items-center justify-center bg-green-500 text-white rounded-full text-xs font-bold hover:bg-green-400 transition-colors">+</button>
+                                    </div>
                                 </div>
-                                <div class="text-[10px] font-orbitron tracking-tighter text-gray-400">AGILIDADE (AGI)</div>
-                                <div class="stat-bar mt-2"><div class="stat-progress w-[35%] !bg-green-500"></div></div>
+                                <div class="text-[10px] font-orbitron tracking-tighter text-gray-400">AGILIDADE (AGI)
+                                </div>
+                                <div class="stat-bar mt-2">
+                                    <div id="stat-progress-agi" class="stat-progress w-[35%] !bg-green-500"></div>
+                                </div>
                             </div>
                         </div>
                         <!-- Vitality -->
                         <div class="group cursor-default">
-                            <div class="glass-panel p-3 rounded-lg border-b-2 border-systemCyan/50 group-hover:scale-105 transition-transform">
+                            <div
+                                class="glass-panel p-3 rounded-lg border-b-2 border-systemCyan/50 group-hover:scale-105 transition-transform">
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-systemCyan"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
-                                    <span class="font-orbitron font-bold text-xl">16</span>
+                                    <span class="text-systemCyan"><svg class="w-4 h-4" fill="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                        </svg></span>
+                                    <div class="flex items-center space-x-2">
+                                        <span id="stat-vit" class="font-orbitron font-bold text-xl">16</span>
+                                        <button id="btn-add-vit" class="hidden w-5 h-5 flex items-center justify-center bg-systemCyan text-systemDark rounded-full text-xs font-bold hover:bg-cyan-400 transition-colors">+</button>
+                                    </div>
                                 </div>
                                 <div class="text-[10px] font-orbitron tracking-tighter text-gray-400">VIGOR (VIT)</div>
-                                <div class="stat-bar mt-2"><div class="stat-progress w-[80%]"></div></div>
+                                <div class="stat-bar mt-2">
+                                    <div id="stat-progress-vit" class="stat-progress w-[80%]"></div>
+                                </div>
                             </div>
                         </div>
                         <!-- Intelligence -->
                         <div class="group cursor-default">
-                            <div class="glass-panel p-3 rounded-lg border-b-2 border-purple-500/50 group-hover:scale-105 transition-transform">
+                            <div
+                                class="glass-panel p-3 rounded-lg border-b-2 border-purple-500/50 group-hover:scale-105 transition-transform">
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-purple-400"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></span>
-                                    <span class="font-orbitron font-bold text-xl">10</span>
+                                    <span class="text-purple-400"><svg class="w-4 h-4" fill="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" />
+                                        </svg></span>
+                                    <div class="flex items-center space-x-2">
+                                        <span id="stat-int" class="font-orbitron font-bold text-xl">10</span>
+                                        <button id="btn-add-int" class="hidden w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full text-xs font-bold hover:bg-purple-400 transition-colors">+</button>
+                                    </div>
                                 </div>
-                                <div class="text-[10px] font-orbitron tracking-tighter text-gray-400">INTELECTO (INT)</div>
-                                <div class="stat-bar mt-2"><div class="stat-progress w-[50%] !bg-purple-500"></div></div>
+                                <div class="text-[10px] font-orbitron tracking-tighter text-gray-400">INTELECTO (INT)
+                                </div>
+                                <div class="stat-bar mt-2">
+                                    <div id="stat-progress-int" class="stat-progress w-[50%] !bg-purple-500"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -205,16 +298,25 @@
             <div class="glass-panel h-64 rounded-xl flex items-center justify-center overflow-hidden relative group">
                 <div class="absolute inset-0 bg-gradient-to-t from-systemCyan/10 to-transparent"></div>
                 <div class="relative z-10 text-center">
-                    <svg class="w-32 h-48 text-systemCyan opacity-40 animate-pulse group-hover:opacity-60 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+                    <svg class="w-32 h-48 text-systemCyan opacity-40 animate-pulse group-hover:opacity-60 transition-opacity"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
                         <path d="M12 2L8 4L7 9L8 14L12 22L16 14L17 9L16 4L12 2Z" />
                         <circle cx="12" cy="5" r="2" />
                         <path d="M7 9H4L3 13H6" />
                         <path d="M17 9H20L21 13H18" />
                     </svg>
-                    <p class="font-orbitron text-[10px] tracking-[0.4em] text-systemCyan mt-4">WIREFRAME_001: MURALHA</p>
+                    <p id="silhouette-label" class="font-orbitron text-[10px] tracking-[0.4em] text-systemCyan mt-4">WIREFRAME_001: MURALHA</p>
                 </div>
-                <div class="absolute top-4 left-4 font-mono text-[8px] text-systemCyan/40 leading-tight">
+                <div id="silhouette-details" class="absolute top-4 left-4 font-mono text-[8px] text-systemCyan/40 leading-tight">
                     DATA_STREAM_AUTH: OK<br>BIO_SYNC: 98.4%<br>LIMITER_STATUS: ACTIVE
+                </div>
+            </div>
+
+            <!-- Achievements Section -->
+            <div class="glass-panel p-6 rounded-xl border-t-2 border-purple-500/50">
+                <h3 class="font-orbitron text-lg text-white mb-4">CONQUISTAS DESBLOQUEADAS</h3>
+                <div id="achievements-container" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <!-- Gerado dinamicamente via JS -->
                 </div>
             </div>
         </section>
@@ -232,56 +334,8 @@
                     </div>
                 </div>
 
-                <div class="space-y-3">
-                    <div class="flex items-center space-x-3 p-3 bg-systemDark/40 rounded-lg border border-systemCyan/20 hover:border-systemCyan/50 transition-colors cursor-pointer group" onclick="toggleTask(this)">
-                        <div class="w-6 h-6 border-2 border-systemCyan rounded flex items-center justify-center transition-all group-hover:shadow-[0_0_8px_#00FFFF]">
-                            <svg class="w-4 h-4 text-systemCyan scale-0 transition-transform check-mark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-sm font-bold text-gray-200">Flexões de Braços Inclinadas</div>
-                            <div class="text-[10px] text-systemCyan font-mono">3 x 10-12 REPS</div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center space-x-3 p-3 bg-systemDark/40 rounded-lg border border-systemCyan/20 hover:border-systemCyan/50 transition-colors cursor-pointer group" onclick="toggleTask(this)">
-                        <div class="w-6 h-6 border-2 border-systemCyan rounded flex items-center justify-center transition-all group-hover:shadow-[0_0_8px_#00FFFF]">
-                            <svg class="w-4 h-4 text-systemCyan scale-0 transition-transform check-mark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-sm font-bold text-gray-200">Agachamento com Apoio</div>
-                            <div class="text-[10px] text-systemCyan font-mono">4 x 12 REPS</div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center space-x-3 p-3 bg-systemDark/40 rounded-lg border border-systemCyan/20 hover:border-systemCyan/50 transition-colors cursor-pointer group" onclick="toggleTask(this)">
-                        <div class="w-6 h-6 border-2 border-systemCyan rounded flex items-center justify-center transition-all group-hover:shadow-[0_0_8_#00FFFF]">
-                            <svg class="w-4 h-4 text-systemCyan scale-0 transition-transform check-mark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-sm font-bold text-gray-200">Step Jacks</div>
-                            <div class="text-[10px] text-systemCyan font-mono">3 x 45s</div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center space-x-3 p-3 bg-systemDark/40 rounded-lg border border-systemCyan/20 hover:border-systemCyan/50 transition-colors cursor-pointer group" onclick="toggleTask(this)">
-                        <div class="w-6 h-6 border-2 border-systemCyan rounded flex items-center justify-center transition-all group-hover:shadow-[0_0_8px_#00FFFF]">
-                            <svg class="w-4 h-4 text-systemCyan scale-0 transition-transform check-mark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-sm font-bold text-gray-200">Prancha com Apoio de Joelhos</div>
-                            <div class="text-[10px] text-systemCyan font-mono">3 x 30s</div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center space-x-3 p-3 bg-systemDark/40 rounded-lg border border-systemCyan/20 hover:border-systemCyan/50 transition-colors cursor-pointer group" onclick="toggleTask(this)">
-                        <div class="w-6 h-6 border-2 border-systemCyan rounded flex items-center justify-center transition-all group-hover:shadow-[0_0_8px_#00FFFF]">
-                            <svg class="w-4 h-4 text-systemCyan scale-0 transition-transform check-mark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-sm font-bold text-gray-200">Burpees Caminhados</div>
-                            <div class="text-[10px] text-systemCyan font-mono">3 x 8 REPS</div>
-                        </div>
-                    </div>
+                <div id="daily-quests-container" class="space-y-3">
+                    <!-- Será gerado dinamicamente via JS -->
                 </div>
 
                 <div class="mt-6 pt-6 border-t border-systemCyan/20">
@@ -300,10 +354,29 @@
         </section>
     </main>
 
+    <!-- Penalty Screen Overlay -->
+    <div id="penalty-overlay" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center hidden">
+        <div class="max-w-md w-full p-8 glass-panel border-2 border-red-600 rounded-tr-3xl rounded-bl-3xl text-center space-y-6">
+            <h1 class="font-orbitron text-4xl font-black text-red-500 tracking-wider glitch-text">[AVISO DE FALHA]</h1>
+            <p class="text-red-400 font-mono text-sm uppercase tracking-widest">A Daily Quest não foi completada a tempo.</p>
+            <div class="p-4 bg-red-950/40 border border-red-500/30 rounded-lg text-left">
+                <h3 class="font-orbitron text-red-500 text-sm tracking-widest mb-2">PUNIÇÃO: SURVIVAL QUEST</h3>
+                <p id="penalty-desc" class="text-gray-300 font-rajdhani text-lg leading-relaxed">
+                    Você foi transportado para a Zona de Penalidade. Para retornar ao sistema, você deve completar a tarefa de punição:
+                    <br><strong class="text-white block mt-2 text-xl font-orbitron">FAÇA 100 AGACHAMENTOS</strong>
+                </p>
+            </div>
+            <button id="btn-complete-penalty" class="w-full bg-red-600 hover:bg-red-500 text-white font-orbitron font-bold py-3 rounded-lg border border-red-400 shadow-[0_0_15px_rgba(239,68,68,0.5)] transition-all uppercase tracking-widest">
+                Completar Penalidade e Sobreviver
+            </button>
+        </div>
+    </div>
+
     <!-- Floating System Notifications -->
     <div id="notification-container" class="fixed bottom-10 right-4 lg:right-10 z-50 flex flex-col space-y-4"></div>
 
     <!-- Scripts -->
-    <script src="./js/app.js" defer></script>
+    <script type="module" src="./js/app.js" defer></script>
 </body>
+
 </html>
